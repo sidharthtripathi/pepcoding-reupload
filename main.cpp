@@ -1,38 +1,37 @@
-class Solution {
-public:
-   bool isBipartite(int V, vector<int>adj[]){
-     vector <int> colors(V,-1);
-     for(int i = 0 ; i<V ; i++){
-         if(DFS(adj,colors,i) == false)
-            return false;
-     }
+#include <iostream>
+#include <vector>
+using namespace std;
 
-      return true; 
-   }
+// to print array
+void printArr(vector<int> &arr){
+   for(int i = 0 ; i<arr.size() ; i++)
+      cout<<arr[i]<<" ";
+   cout<<endl;
+}
 
-   bool DFS(vector<int> adj[] ,vector<int> &colors, int src , int parent = -1 ){
-      if(parent==-1) colors[src] = 0;
-      else colors[src] = !colors[parent];
+void printJumps(int n,vector <int> psf = {}){
 
-      // visiting nbrs
-      vector <int> nbrs = adj[src];
-      for(int i = 0 ; nbrs.size() ; i++){
-         if(colors[nbrs[i]] == -1)
-            if(DFS(adj,colors,nbrs[i],src)){
-               return false;
-            }
-         else{
-            if(colors[nbrs[i]] == colors[src])
-               return false;
-         }
-      } 
+  if(n==0){
+   printArr(psf);
+   return;
+  } 
 
 
-      return true;
+  // now taking the jumps
+  for(int i = 1 ; i<=n ; i++){
+      psf.push_back(i);
+      printJumps(n-i,psf);
+      psf.pop_back();
+  }
 
 
-   }
+}
 
-  
 
-};
+int main(){
+
+printJumps(3);
+
+
+
+}
