@@ -28,6 +28,7 @@ void solution(int i , int n , int  e, int minE, vector<int> &heights){
 int main(){
 
 int minE = INT_MAX;
+solution(0,)
 
 
 }
